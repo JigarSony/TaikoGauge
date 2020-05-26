@@ -1,0 +1,28 @@
+const { openBrowser, goto, reload, goBack, goForward, title, currentURL, closeBrowser } = require('taiko');
+(async () => {
+    try {
+        await openBrowser();
+        await goto("https://www.google.com");
+        await goto("google.com");
+        await goto("facebook.com");
+        await goto("https://admin:admin@the-internet.herokuapp.com/basic_auth");
+        await goto("facebook.com");
+        await reload("facebook.com");
+        await goto("google.com");
+        await goto("facebook.com");
+        await goBack();
+        await goForward();
+        await goBack();
+        await goForward();
+        await title();
+        await goBack();
+        await title();
+        await currentURL();
+        await goBack();
+        await currentURL();
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await closeBrowser();
+    }
+})();

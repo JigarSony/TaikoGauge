@@ -1,0 +1,33 @@
+const { openBrowser, closeBrowser, switchTo, closeTab, emulateNetwork, goto, emulateDevice, setViewPort } = require('taiko');
+(async () => {
+    try {
+        await openBrowser();
+        await closeBrowser();
+        await openBrowser({headless:true});
+        await closeBrowser();
+        await openBrowser({headless:false});
+        await closeBrowser();
+        await openBrowser({args:['--window-size=1440,900']});
+        await closeBrowser();
+        await openBrowser();
+        await switchTo("http://www.facebook.com");
+        await switchTo("http://www.google.com");
+        await switchTo("http://www.facebook.com");
+        await switchTo("http://www.google.com");
+        await switchTo("Google");
+        await switchTo("Google");
+        await closeTab("http://www.facebook.com");
+        await closeTab("Google");
+        await openBrowser();
+        await emulateNetwork("Offline");
+        await emulateNetwork("WiFi");
+        await goto("http://www.google.com");
+        await emulateDevice('iPhone 7');
+        await setViewPort({width:600,height:800});
+        await setViewPort({width:800,height:800});
+    } catch (error) {
+        console.error(error);
+    } finally {
+        await closeBrowser();
+    }
+})();
